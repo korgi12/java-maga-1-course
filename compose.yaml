@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: music_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - music_data:/var/lib/postgresql/data
+      - ./lab-06/sql/01-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./lab-06/sql/02-data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+volumes:
+  music_data:
