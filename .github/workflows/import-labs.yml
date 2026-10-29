@@ -1,0 +1,28 @@
+name: Import Java labs
+on:
+  push:
+    paths:
+      - ".github/workflows/import-labs.yml"
+      - ".upload/java-sources.tar.xz.b64"
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract source files
+        run: |
+          base64 -d .upload/java-sources.tar.xz.b64 > /tmp/java-sources.tar.xz
+          tar -xJf /tmp/java-sources.tar.xz -C .
+          rm -rf .upload
+          rm -f .github/workflows/import-labs.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
+      - name: Commit sources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Java laboratory projects" || exit 0
+          git push
