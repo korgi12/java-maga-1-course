@@ -22,6 +22,7 @@ public final class TransportIO {
 
     public static void outputTransport(Transport transport, OutputStream stream) throws IOException {
         DataOutputStream out = new DataOutputStream(stream);
+        writeString(out, transport.getClass().getSimpleName());
         writeString(out, transport.getMark());
         out.writeInt(transport.getSize());
         String[] names = transport.getModels();
@@ -33,8 +34,9 @@ public final class TransportIO {
         out.flush();
     }
 
-    public static Transport inputTransport(InputStream stream, String type) throws IOException {
+    public static Transport inputTransport(InputStream stream) throws IOException {
         DataInputStream in = new DataInputStream(stream);
+        String type = readString(in);
         String mark = readString(in);
         int count = in.readInt();
         if (count < 0 || count > 1_000_000) throw new IOException("Invalid model count");
