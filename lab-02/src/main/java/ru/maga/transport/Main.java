@@ -19,7 +19,7 @@ public final class Main {
         Path binary = directory.resolve("transport.bin");
         try (OutputStream out = Files.newOutputStream(binary)) { TransportIO.outputTransport(original, out); }
         Transport restoredBinary;
-        try (InputStream in = Files.newInputStream(binary)) { restoredBinary = TransportIO.inputTransport(in, original.getClass().getSimpleName()); }
+        try (InputStream in = Files.newInputStream(binary)) { restoredBinary = TransportIO.inputTransport(in); }
         Path text = directory.resolve("transport.txt");
         try (Writer out = Files.newBufferedWriter(text)) { TransportIO.writeTransport(original, out); }
         Transport restoredText;
