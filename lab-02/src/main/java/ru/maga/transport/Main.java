@@ -19,7 +19,7 @@ public final class Main {
         Path binary = directory.resolve("transport.bin");
         try (OutputStream out = Files.newOutputStream(binary)) { TransportIO.outputTransport(original, out); }
         Transport restoredBinary;
-        try (InputStream in = Files.newInputStream(binary)) { restoredBinary = TransportIO.inputTransport(in); }
+        try (InputStream in = Files.newInputStream(binary)) { restoredBinary = TransportIO.inputTransport(in, original.getClass().getSimpleName()); }
         Path text = directory.resolve("transport.txt");
         try (Writer out = Files.newBufferedWriter(text)) { TransportIO.writeTransport(original, out); }
         Transport restoredText;
@@ -32,7 +32,15 @@ public final class Main {
         try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(serialized))) {
             deserialized = (Transport) in.readObject();
         }
-        System.out.println("Binary: " + equivalent(original, restoredBinary));
+        System.out.println("Restored binary:");
+        System.out.println("Type: " + restoredBinary.getClass().getSimpleName());
+        System.out.println("Mark: " + restoredBinary.getMark());
+        String[] restoredModels = restoredBinary.getModels();
+        double[] restoredPrices = restoredBinary.getPrices();
+        for (int i = 0; i < restoredModels.length; i++) {
+            System.out.println(restoredModels[i] + ": " + restoredPrices[i]);
+        }
+        System.out.println("Binary equivalent: " + equivalent(original, restoredBinary));
         System.out.println("Text: " + equivalent(original, restoredText));
         System.out.println("Serialization: " + equivalent(original, deserialized));
         TransportIO.writeTransport(original, new OutputStreamWriter(System.out));
