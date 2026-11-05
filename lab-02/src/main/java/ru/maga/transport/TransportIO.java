@@ -33,12 +33,16 @@ public final class TransportIO {
         out.flush();
     }
 
-    public static Transport inputTransport(InputStream stream) throws IOException {
+    public static Transport inputTransport(InputStream stream, String type) throws IOException {
         DataInputStream in = new DataInputStream(stream);
         String mark = readString(in);
         int count = in.readInt();
         if (count < 0 || count > 1_000_000) throw new IOException("Invalid model count");
-        Transport result = new Car(mark, 0);
+        Transport result = switch (type) {
+            case "Car" -> new Car(mark, 0);
+            case "Motorcycle" -> new Motorcycle(mark, 0);
+            default -> throw new IOException("Unknown transport type: " + type);
+        };
         for (int i = 0; i < count; i++) {
             try {
                 result.addModel(readString(in), in.readDouble());
