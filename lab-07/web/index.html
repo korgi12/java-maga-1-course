@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Калькулятор — ввод</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<main class="container">
+    <section class="panel">
+        <div class="eyebrow">Лабораторная работа №7</div>
+        <h1>Арифметический калькулятор</h1>
+        <p class="lead">Введите два числа, выберите арифметическую операцию и получите результат на следующей странице.</p>
+        <form action="result.html" method="get" id="calculator-form">
+            <div class="fields">
+                <label>Первое число
+                    <input type="number" name="first" step="any" placeholder="Например, 15,5" required>
+                </label>
+                <label>Второе число
+                    <input type="number" name="second" step="any" placeholder="Например, 2" required>
+                </label>
+            </div>
+            <fieldset>
+                <legend>Выберите операцию</legend>
+                <div class="operations">
+                    <label><input type="radio" name="operation" value="add" checked> Сложение +</label>
+                    <label><input type="radio" name="operation" value="subtract"> Вычитание −</label>
+                    <label><input type="radio" name="operation" value="multiply"> Умножение ×</label>
+                    <label><input type="radio" name="operation" value="divide"> Деление ÷</label>
+                </div>
+            </fieldset>
+            <button type="submit">Вычислить</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Калькулятор — результат</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<main class="container">
+    <section class="panel result-panel">
+        <div class="eyebrow">Результат вычисления</div>
+        <h1>Ваш результат</h1>
+        <p class="lead" id="status">Результаты арифметической операции</p>
+        <table aria-label="Таблица результата">
+            <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+            <tbody>
+                <tr><td>Первое число</td><td id="first-value">—</td></tr>
+                <tr><td>Операция</td><td id="operation-value">—</td></tr>
+                <tr><td>Второе число</td><td id="second-value">—</td></tr>
+                <tr class="highlight"><td>Результат</td><td id="result-value">—</td></tr>
+            </tbody>
+        </table>
+        <figure class="photo">
+            <img src="favorite-photo.jpg" alt="Фотография запуска космического корабля">
+            <figcaption>Любимая фотография — космический запуск</figcaption>
+        </figure>
+        <a class="back-link" href="index.html">Вернуться к вводу данных</a>
+    </section>
+</main>
+</body>
+</html>
